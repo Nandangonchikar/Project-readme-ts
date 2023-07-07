@@ -1,0 +1,65 @@
+{
+	"name": "project-readme",
+	"displayName": "",
+	"version": "0.0.1",
+	"publisher": "",
+	"private": true,
+	"engines": {
+		"vscode": "^1.73.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "project-readme.generateReadme",
+				"title": "Generate README"
+			},
+			{
+				"command": "project-readme.setAPIKey",
+				"title": "Set API Key"
+			}
+		],
+		"menus": {
+			"explorer/context": [
+				{
+					"command": "project-readme.generateReadme",
+					"group": "navigation",
+					"when": "resourceIsFolder == false && resourceScheme == 'file' && resourceLangId =~ /^(javascript|python)$/",
+					"title": "Generate README"
+				}
+			]
+		},
+		"configuration": {
+			"type": "object",
+			"title": "project-readme",
+			"properties": {
+				"project-readme.apiKey": {
+					"type": "string",
+					"default": "",
+					"description": "openAI API Key"
+				}
+			}
+		}
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"lint": "eslint \"src/**/*.ts\"",
+		"watch": "tsc -watch -p ./"
+	},
+	"devDependencies": {
+		"@types/node": "^20.4.0",
+		"@types/vscode": "^1.79.1",
+		"@typescript-eslint/eslint-plugin": "^5.61.0",
+		"@typescript-eslint/parser": "^5.61.0",
+		"eslint": "^8.44.0",
+		"typescript": "^5.1.6"
+	},
+	"dependencies": {
+		"chatgpt": "^5.2.5"
+	}
+}
